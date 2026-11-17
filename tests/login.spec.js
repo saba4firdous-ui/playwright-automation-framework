@@ -8,6 +8,15 @@ test ("valid login test", async function ({page}) {
     await page.getByPlaceholder("Password").type("admin123")
 
     await page.locator("button[type='submit']").click()
+    await page.waitForTimeout(5000)
     await expect(page).toHaveURL(/dashboard/)
+
+    await page.getByAltText("profile picture").first().click()
+
+    await page.getByText("Logout").click()
+
+    await page.waitForTimeout(3000)
+
+    await expect (page).toHaveURL(/login/)
 
 })
